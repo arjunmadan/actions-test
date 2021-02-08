@@ -1,0 +1,18 @@
+name: Test Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to (uat/production)'
+        required: true
+        default: 'uat'
+
+jobs:
+  deploy:
+    # Use environment here to allow protection rules preventing the workflow from being run without review in some environments, but force a review in production.
+    environment: ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print environment name
+      run: |
+        echo "Environment passed in by the user is: ${{ github.event.inputs.environment }}"
