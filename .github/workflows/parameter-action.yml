@@ -1,0 +1,20 @@
+name: Test Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      default_input:
+        description: 'random input to echo'
+        required: true
+        default: 'default'
+      no_default_input:
+        required: true
+        description: 'random input to echo'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print input vars
+      run: |
+        echo "default_input: ${{ github.event.inputs.default_input }}"
+        echo "no_default_input: ${{ github.event.inputs.no_default_input }}"
